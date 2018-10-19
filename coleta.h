@@ -6,79 +6,70 @@
 #define AT011018_COLETA_H
 #endif //AT011018_COLETA_H
 
-struct pipelineInformations{
-  int typePipeline;
-  int cores;
-  int stagesPipeline;
-  int fetchProcess;
-  int decodeProcess;
-  int readOperandsProcess;
-  int executeProcess;
-  int writeResultProcess;
-} passTestMemory;
+typedef struct pipe Pipe;
 
-int isScaleOrSuperScale(){
+int isScaleOrSuperScale(Pipe* p){
   do{
     printf("Determine o tipo de pipeline: \n");
     printf("\t 1 - Escalar\n");
     printf("\t 2 - Super Escalar\n");
-    scanf("%d", &passTestMemory.typePipeline);
-  } while(passTestMemory.typePipeline < 1 || passTestMemory.typePipeline > 2);
+    scanf("%d", p->typePipeline);
+  } while(p->typePipeline < 1 || p->typePipeline > 2);
 
-  if (passTestMemory.typePipeline == 2){
+  if (p->typePipeline == 2){
     do{
       printf("\nQuantidade de núcleos: ");
-      scanf("%d", &passTestMemory.cores);
-        if(passTestMemory.cores < 2){
+      scanf("%d", &p->cores);
+        if(p->cores < 2){
           printf("\nPara ser SUPER ESCALAR é necessário que o processador tenha 2 ou mais núcleos");
         };
-    } while( passTestMemory.cores < 2);
+    } while( p->cores < 2);
   };
 };
 
-extern int colectManualInsertion() {
+int colectManualInsertion(Pipe* p) {
 
-  isScaleOrSuperScale();
+  isScaleOrSuperScale(&p);
 
  do {
    printf("\nNúmero de estágios na pipeline: ");
-   scanf("%d", &passTestMemory.stagesPipeline);
-   switch (passTestMemory.stagesPipeline){
+   scanf("%d", &p->stagesPipeline);
+   switch (p->stagesPipeline){
        case 4: printf("Pipeline de 4 estágios\n"); break;
        case 5: printf("Pipeline de 5 estágios\n"); break;
        default: printf("Valor inválido\n"); break;
    }
- } while (passTestMemory.stagesPipeline < 4 || passTestMemory.stagesPipeline > 1);
+ } while (p->stagesPipeline < 4 || p->stagesPipeline > 1);
 
  printf("Entre com os tempos correspondentes a cada processo da pipeline:\n");
 
- if(passTestMemory.stagesPipeline == 5){
+ if(p->stagesPipeline == 5){
    printf("Busca de Instrução: ");
-   scanf("%d", &passTestMemory.fetchProcess);
+   scanf("%d", &p->fetchProcess);
    printf("Decodificação da Instrução: ");
-   scanf("%d", &passTestMemory.decodeProcess);
+   scanf("%d", &p->decodeProcess);
    printf("Busca de Operandos: ");
-   scanf("%d", &passTestMemory.readOperandsProcess);
+   scanf("%d", &p->readOperandsProcess);
    printf("Execução: ");
-   scanf("%d", &passTestMemory.executeProcess);
+   scanf("%d", &p->executeProcess);
    printf("Escrita em memória: ");
-   scanf("%d", &passTestMemory.writeResultProcess);
+   scanf("%d", &p->writeResultProcess);
  } else {
    printf("Busca de Instrução: ");
-   scanf("%d", &passTestMemory.fetchProcess);
+   scanf("%d", &p->fetchProcess);
    printf("Decodificação da Instrução: ");
-   scanf("%d", &passTestMemory.decodeProcess);
+   scanf("%d", &p->decodeProcess);
    printf("Execução: ");
-   scanf("%d", &passTestMemory.executeProcess);
+   scanf("%d", &p->executeProcess);
    printf("Escrita em memória: ");
-   scanf("%d", &passTestMemory.writeResultProcess);
+   scanf("%d", &p->writeResultProcess);
  };
   return 0;
 };
 
-extern int colectAutoInsertion(struct test *){
-  printf("Data Recived: %x\n", test);
-  printf("Data inside Struct: %x\n", test->dataTest);
+extern int colectAutoInsertion(struct test *ptr){
+  printf("Data Recived: %x\n", ptr);
+  printf("Data inside Struct: %x\n", ptr->dataTest);
     printf("Coleta Arquivo Invocada\n");
 
   return 0;

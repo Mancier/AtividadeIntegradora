@@ -4,15 +4,16 @@
 #include "pipeline.h"
 #include "coleta.h"
 
-int returnMemoryAddress(char *allocadedVar){
-//    char * alloc = malloc(sizeof(allocadedVar));
-//    printf("Memory address: %x\n", malloc(sizeof(allocadedVar)));
-    return malloc(sizeof(allocadedVar));
-};
-
-struct test {
-    int dataTest = 5;
-} passTest;
+struct pipelineInformations{
+  int typePipeline;
+  int cores;
+  int stagesPipeline;
+  int fetchProcess;
+  int decodeProcess;
+  int readOperandsProcess;
+  int executeProcess;
+  int writeResultProcess;
+} pipeline;
 
 int welcomeMessage(){
     int option = 0;
@@ -40,8 +41,8 @@ int main() {
     do{
         int option = welcomeMessage();
         switch (option){
-            case 1: shouldRepeat = colectManualInsertion(); break;
-            case 2: shouldRepeat = colectAutoInsertion(&passTest); break;
+            case 1: shouldRepeat = colectManualInsertion(&pipeline); break;
+            case 2: shouldRepeat = colectAutoInsertion(); break;
             case 3: shouldRepeat = informationDevelopers(); break;
             default: shouldRepeat = 1;
         };
