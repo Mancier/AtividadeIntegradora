@@ -15,8 +15,9 @@ int main() {
     setlocale(LC_ALL, "Portuguese");
     Pipeline *pipeline;
     int option;
+    char filePath[50];
     do{
-        free_pipeline(pipeline);
+        //!!pipeline ? free_pipeline(pipeline) : "";
         option = welcome_message();
         switch (option){
             case 1: pipeline = manual_insertion_data(); break;
@@ -27,15 +28,17 @@ int main() {
     } while(!pipeline);
 
     //Iniciando o tratamento
-    //do{
-    //    printf("\nDeseja salvar esses dados em um aqrquivo .txt?\n1 - Sim\n0 - Nao\nOpcao: ");
-    //    scanf("%d", option);
-    //    if(!option){
-    //        printf("Valor Invalido!\n");
-    //    } else {
-    //        write_files();
-    //    }
-    //} while (!option);
+    do{
+        printf("\nDeseja salvar esses dados em um aqrquivo .txt?\n1 - Sim\n0 - Nao\nOpcao: ");
+        scanf("%d", &option);
+        if(option){
+            printf("Entre com o caminho e o nome do arquivo: ");
+            scanf("%s", filePath);
+            write_files(pipeline, filePath);
+        } else {
+            printf("Valor Invalido!\n");
+        }
+    } while (option != 1 && option != 0);
 
 };
 

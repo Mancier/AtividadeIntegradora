@@ -10,6 +10,10 @@
 
 Pipeline* read_files(FILE* pointerFile, Pipeline *pipeline);
 
-void write_files(Pipeline *pipeline, char* pathWithNameFile);
+void write_files(Pipeline *pipeline, char * pathWithNameFile);
+
+FILE* open_file(char* filePath);
+
+void close_file(FILE* filePath);
 
 #endif //ATIVIDADEINTEGRADORA_FILES_H

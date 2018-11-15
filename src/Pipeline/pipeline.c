@@ -3,7 +3,6 @@
 //
 #include <stdio.h>
 #include "pipeline.h"
-#include "../Insertions/insertions.h"
 #include "../Pipeline/pipeline.h"
 
 Pipeline *createPipeline(int totalStage, int cores, int type, int totalInstruction, int stages[5]){
@@ -43,6 +42,7 @@ int sequencial_instruction_calculation(Pipeline *pipeline) {
 
 int parellel_multiple_instruction(Pipeline *pipeline){
     int time = pipeline->arrayStages[0];
+
     //Procurando o maior tempo de execucao
     for(int i = 0; i < pipeline->stagesPipeline; i++) {
         if(pipeline->arrayStages[i] > time){
@@ -71,5 +71,4 @@ int time_saving(Pipeline *pipeline){
 
 void free_pipeline(Pipeline* pipeline){
     free(pipeline);
-    pipeline = NULL;
 }

@@ -13,12 +13,13 @@ Pipeline* manual_insertion_data() {
         printf("Determine o tipo de pipeline: \n");
         printf("\t 1 - Escalar\n");
         printf("\t 2 - Super Escalar\n");
+        printf("Opção: ");
         scanf("%d", &type);
     } while (type < 1 || type > 2);
 
     if (type == 2) {
         do {
-            printf("\nQuantidade de núcleos: ");
+            printf("Quantidade de núcleos: ");
             scanf("%d", &cores);
             if (cores < 2) {
                 printf("\nPara ser SUPER ESCALAR é necessário que o processador tenha 2 ou mais núcleos");
@@ -28,8 +29,16 @@ Pipeline* manual_insertion_data() {
         cores = 1;
     };
 
+    do{
+        printf("Entre com a quantidade de instrucoes: ");
+        scanf("%d", &totalInstruction);
+        if(totalInstruction <= 0){
+            printf("Valor Invalido\n");
+        }
+    } while (totalInstruction <= 0);
+
     do {
-        printf("\nNúmero de estágios na pipeline (4 ou 5): ");
+        printf("Número de estágios na pipeline (4 ou 5): ");
         scanf("%d", &totalStage);
         switch (totalStage) {
             case 4:
@@ -43,15 +52,6 @@ Pipeline* manual_insertion_data() {
                 break;
         }
     } while (!(totalStage == 5 || totalStage == 4));
-
-    do{
-        printf("Entre com a quantidade de instrucoes: ");
-        scanf("%d", &totalInstruction);
-        if(totalInstruction <= 0){
-            printf("Valor Invalido\n");
-        }
-    } while (totalInstruction <= 0);
-
     printf("Entre com os tempos correspondentes a cada processo da pipeline\n");
     printf("Busca de Instrução: ");
     scanf("%d", &stages[0]);
