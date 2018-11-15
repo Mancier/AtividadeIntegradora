@@ -27,7 +27,7 @@ int single_instruction_calculation(Pipeline *pipeline);
 
 int sequencial_instruction_calculation(Pipeline *pipeline);
 
-int multiple_parellel_instruction(Pipeline *pipeline);
+int parellel_multiple_instruction(Pipeline *pipeline);
 
 void free_pipeline(Pipeline* pipeline);
 

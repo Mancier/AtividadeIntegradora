@@ -18,7 +18,7 @@ Pipeline *createPipeline(int totalStage, int cores, int type, int totalInstructi
     pipeline->fetchProcess = stages[0];
     pipeline->decodeProcess = stages[1];
     pipeline->readOperandsProcess = stages[2];
-    pipeline-> executeProcess = stages[3];
+    pipeline->executeProcess = stages[3];
     pipeline->writeResultProcess = pipeline->stagesPipeline == 5 ? stages[4] : 0;
     for (int i = 0; i < pipeline->stagesPipeline; ++i) {
         pipeline->arrayStages[i] = stages[i];
@@ -46,7 +46,7 @@ int sequencial_instruction_calculation(Pipeline *pipeline) {
     return pipeline->multipleSequentialInstruction;
 };
 
-int multiple_parellel_instruction(Pipeline *pipeline){
+int parellel_multiple_instruction(Pipeline *pipeline){
     int time = pipeline->arrayStages[0];
     //Procurando o maior tempo de execucao
     for(int i = 0; i < pipeline->stagesPipeline; i++) {
@@ -62,7 +62,16 @@ int multiple_parellel_instruction(Pipeline *pipeline){
         pipeline->multipleParellelInstruction += time;
     }
     pipeline->multipleParellelInstruction += pipeline->singleInstruction;
+
     return pipeline->multipleParellelInstruction;
+}
+
+int time_saving(Pipeline *pipeline){
+    int sequencial = sequencial_instruction_calculation(pipeline);
+    int parallel = parellel_multiple_instruction(pipeline);
+    pipeline->timeSaving = sequencial - parallel;
+
+    return pipeline->timeSaving;
 }
 
 void free_pipeline(Pipeline* pipeline){

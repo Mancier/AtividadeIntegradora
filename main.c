@@ -28,7 +28,7 @@ int main() {
 
     printf("Single Instruction Time: %d", single_instruction_calculation(pipeline));
     printf("Sequencial Instructions: %d", sequencial_instruction_calculation(pipeline));
-    printf("Multiple Instruction: %d", multiple_parellel_instruction(pipeline));
+    printf("Multiple Instruction: %d", parellel_multiple_instruction(pipeline));
 
     //Iniciando o tratamento
     //do{
