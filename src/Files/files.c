@@ -5,20 +5,26 @@
 #include "files.h"
 #include <stdio.h>
 
-Pipeline* read_files(char* path, FILE* pointerFile){
-    Pipeline *pipe;
+Pipeline* read_files(FILE* pointerFile, Pipeline *pipeline){
+    fscanf(pointerFile,"\nType: %d"
+                         "\nCores: %d"
+                         "\nTotal of Stages: %d"
+                         "\nStages: %d"
+                         "\nInstructions: %d", &pipeline->typePipeline, &pipeline->cores, &pipeline->stagesPipeline, &pipeline->arrayStages, &pipeline->totalInstrunction );
 };
 
-void write_files(char* pathWithNameFile){
-    //FILE* openedFile = openedFile(pathWithNameFile);
-    //if(!!openedFile)
+void write_files(Pipeline *pipeline, char* pathWithNameFile){
+    fprintf(pathWithNameFile,"\nType: %d"
+                             "\nCores: %d"
+                             "\nTotal of Stages: %d"
+                             "\nStages: %d"
+                             "\nInstructions: %d", pipeline->typePipeline, pipeline->cores, pipeline->stagesPipeline, pipeline->arrayStages, pipeline->totalInstrunction);
 };
 
 FILE* open_file(char* filePath){
     return fopen(filePath, "w+");
-
 };
 
-int close_file(FILE* filePath){
-    fclose(filePath) ? 1 : 0;
+void close_file(FILE* filePath){
+    fclose(filePath);
 };

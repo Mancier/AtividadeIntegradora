@@ -13,22 +13,18 @@ int welcome_message();
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
-    Pipeline *pipeline = NULL;
+    Pipeline *pipeline;
     int option;
     do{
+        free_pipeline(pipeline);
         option = welcome_message();
         switch (option){
             case 1: pipeline = manual_insertion_data(); break;
             case 2: pipeline = files_insertion_data(); break;
-//            case 3: pipeline = informationDevelopers(); break;
+            case 3: information_developers(); break;
             default: break;
         };
     } while(!pipeline);
-//    printf(pipeline);
-
-    printf("Single Instruction Time: %d", single_instruction_calculation(pipeline));
-    printf("Sequencial Instructions: %d", sequencial_instruction_calculation(pipeline));
-    printf("Multiple Instruction: %d", parellel_multiple_instruction(pipeline));
 
     //Iniciando o tratamento
     //do{

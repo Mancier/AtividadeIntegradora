@@ -8,8 +8,8 @@
 #include <bits/types/FILE.h>
 #include "../Insertions/insertions.h"
 
-Pipeline* read_files(char* path, FILE* pointerFile);
+Pipeline* read_files(FILE* pointerFile, Pipeline *pipeline);
 
-void write_files(char* pathWithNameFile);
+void write_files(Pipeline *pipeline, char* pathWithNameFile);
 
 #endif //ATIVIDADEINTEGRADORA_FILES_H

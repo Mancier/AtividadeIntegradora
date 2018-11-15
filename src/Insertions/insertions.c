@@ -69,10 +69,12 @@ Pipeline* manual_insertion_data() {
     return pipeline;
 };
 
+/*
+ * TODO Terminar a leitura de arquivos, e salva-los na struct
+ */
 Pipeline* files_insertion_data(){
-
 }
 
-void informationDevelopers(){
+void information_developers(){
     printf("Informações sobre os desenvolvedores");
 };

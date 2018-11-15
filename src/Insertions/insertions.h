@@ -5,12 +5,11 @@
 #ifndef ATIVIDADEINTEGRADORA_INSERTIONS_H
 #define ATIVIDADEINTEGRADORA_INSERTIONS_H
 
-typedef struct pipeline Pipeline; //Novo tipo de dado
+#include "../Pipeline/pipeline.h"
+Pipeline* manual_insertion_data();
 
-// Alocando Struct
-Pipeline* createPipeline(int totalStage, int cores, int type, int totalInstructions, int stages[5]);
+Pipeline* files_insertion_data();
 
-// Liberando espaço em memória da Pipe
-void free_pipeline(Pipeline* Pipeline);
+void information_developers();
 
 #endif //ATIVIDADEINTEGRADORA_INSERTIONS_H

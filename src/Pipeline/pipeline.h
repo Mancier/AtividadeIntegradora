@@ -8,11 +8,6 @@ typedef struct pipeline{
     int typePipeline;
     int cores;
     int stagesPipeline;
-    int fetchProcess;
-    int decodeProcess;
-    int readOperandsProcess;
-    int executeProcess;
-    int writeResultProcess;
     int arrayStages[5];
     int totalInstrunction;
     int singleInstruction;

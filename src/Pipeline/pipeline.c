@@ -15,11 +15,6 @@ Pipeline *createPipeline(int totalStage, int cores, int type, int totalInstructi
     pipeline->typePipeline = type;
     pipeline->cores = cores;
     pipeline->stagesPipeline = totalStage;
-    pipeline->fetchProcess = stages[0];
-    pipeline->decodeProcess = stages[1];
-    pipeline->readOperandsProcess = stages[2];
-    pipeline->executeProcess = stages[3];
-    pipeline->writeResultProcess = pipeline->stagesPipeline == 5 ? stages[4] : 0;
     for (int i = 0; i < pipeline->stagesPipeline; ++i) {
         pipeline->arrayStages[i] = stages[i];
     }
