@@ -4,9 +4,31 @@
 
 #ifndef AT011018_PIPELINE_H
 #define AT011018_PIPELINE_H
+typedef struct pipeline{
+    int typePipeline;
+    int cores;
+    int stagesPipeline;
+    int fetchProcess;
+    int decodeProcess;
+    int readOperandsProcess;
+    int executeProcess;
+    int writeResultProcess;
+    int arrayStages[5];
+    int totalInstrunction;
+    int singleInstruction;
+    int multipleSequentialInstruction;
+    int multipleParellelInstruction;
+    int timeSaving;
+} Pipeline;
 
-typedef struct Pipeline pipe;
+Pipeline *createPipeline(int totalStage, int cores, int type, int totalInstruction, int stages[5]);
 
-void addNewValue(struct Pipeline* pipe, char dataName, int newValue);
+int single_instruction_calculation(Pipeline *pipeline);
+
+int sequencial_instruction_calculation(Pipeline *pipeline);
+
+int multiple_parellel_instruction(Pipeline *pipeline);
+
+void free_pipeline(Pipeline* pipeline);
 
 #endif //AT011018_PIPELINE_H
