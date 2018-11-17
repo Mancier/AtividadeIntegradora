@@ -28,9 +28,7 @@ Pipeline *read_files(FILE* pointerFile){
     return createPipeline(type, cores, totalStages, arrayStages, totalInstruction);
 };
 
-void write_files(Pipeline *pipeline, char* pathWithNameFile){
-    FILE *file;
-    file = open_file(pathWithNameFile);
+void write_files(Pipeline *pipeline, FILE *file){
     fprintf(file,"Type: %d"
              "\nCores: %d"
              "\nTotal of Stages: %d"
@@ -49,8 +47,12 @@ void write_files(Pipeline *pipeline, char* pathWithNameFile){
     close_file(file);
 };
 
-FILE* open_file(char* filePath){
-    return fopen(filePath, "w+");
+FILE* open_file(char* filePath, char *mode){
+    FILE * file = fopen(filePath, mode);
+    if(file == NULL){
+        printf("Falha na Abertura do arquivo, por favor tente novamente\n");
+    }
+    return file;
 };
 
 void close_file(FILE* filePath){

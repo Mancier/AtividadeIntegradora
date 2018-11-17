@@ -9,7 +9,8 @@
 #include "../Files/files.h"
 
 Pipeline* manual_insertion_data() {
-    int totalStage, totalInstruction, cores, type, stages[5];
+    int totalStage, totalInstruction, cores, type, stages[5], option;
+    char *filePath;
     do {
         printf("Determine o tipo de pipeline: \n");
         printf("\t 1 - Escalar\n");
@@ -66,18 +67,33 @@ Pipeline* manual_insertion_data() {
         printf("Escrita em memória: ");
         scanf("%d", &stages[4]);
     }
+
     Pipeline *pipeline = createPipeline(type, cores, totalStage, stages, totalInstruction);
+
+    do{
+        printf("\nDeseja salvar esses dados em um aqrquivo .txt?\n1 - Sim\n0 - Nao\nOpcao: ");
+        scanf("%d", &option);
+        if(option){
+            printf("Entre com o caminho e o nome do arquivo: ");
+            scanf("%s", &filePath);
+            write_files(pipeline, open_file(&filePath, "w"));
+        } else {
+            printf("Valor Invalido!\n");
+        }
+    } while (option != 1 && option != 0);
+
     return pipeline;
 };
 
-/*
- * TODO Terminar a leitura de arquivos, e salva-los na struct
- */
 Pipeline* files_insertion_data(){
     char *filePath;
-    printf("Entre com o caminho e o nome do arquivo: ");
-    scanf("%s", filePath);
-    return read_files(open_file(filePath));
+    FILE *file;
+    do {
+        printf("Entre com o caminho e o nome do arquivo: ");
+        scanf("%s", &filePath);
+        file = open_file(&filePath, "r");
+    } while (!file);
+    return read_files(file);
 }
 
 void information_developers(){

@@ -6,6 +6,14 @@
 #include "src/Pipeline/pipeline.h"
 #include "src/Insertions/insertions.h"
 
+/*
+ * TODO TERMINAR DE CRIAR A APRENSTAÇÃO DO CALCULO INDIVIDUALIZADO
+ * Para 1 única instrução
+ * Para múltiplas instruções sequenciais
+ * Para múltiplas instruções paralelas (em pipeline)
+ * Economia de tempo
+ */
+
 Pipeline* manual_insertion_data();
 Pipeline* files_insertion_data();
 
@@ -14,6 +22,7 @@ int welcome_message();
 int main() {
     setlocale(LC_ALL, "Portuguese");
     Pipeline *pipeline;
+    FILE *file;
     int option;
     char filePath[50];
     do{
@@ -26,19 +35,6 @@ int main() {
             default: break;
         };
     } while(!pipeline);
-
-    //Iniciando o tratamento
-    do{
-        printf("\nDeseja salvar esses dados em um aqrquivo .txt?\n1 - Sim\n0 - Nao\nOpcao: ");
-        scanf("%d", &option);
-        if(option){
-            printf("Entre com o caminho e o nome do arquivo: ");
-            scanf("%s", filePath);
-            write_files(pipeline, filePath);
-        } else {
-            printf("Valor Invalido!\n");
-        }
-    } while (option != 1 && option != 0);
 
 };
 

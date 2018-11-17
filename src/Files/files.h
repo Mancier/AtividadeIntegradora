@@ -6,14 +6,13 @@
 #define ATIVIDADEINTEGRADORA_FILES_H
 
 #include <bits/types/FILE.h>
-#include "stdbool.h"
 #include "../Insertions/insertions.h"
 
 Pipeline *read_files(FILE* pointerFile);
 
-void write_files(Pipeline *pipeline, char * pathWithNameFile);
+void write_files(Pipeline *pipeline, FILE *file);
 
-FILE* open_file(char* filePath);
+FILE* open_file(char* filePath, char* mode);
 
 void close_file(FILE* filePath);
 
