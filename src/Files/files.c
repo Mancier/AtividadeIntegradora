@@ -39,11 +39,11 @@ void write_files(Pipeline *pipeline, char* pathWithNameFile){
              pipeline->typePipeline,
              pipeline->cores,
              pipeline->stagesPipeline,
-             totalStages[0],
-             totalStages[1],
-             totalStages[2],
-             totalStages[3],
-             totalStages[4],
+             pipeline->arrayStages[0],
+             pipeline->arrayStages[1],
+             pipeline->arrayStages[2],
+             pipeline->arrayStages[3],
+             pipeline->arrayStages[4],
              pipeline->totalInstrunction
             );
     close_file(file);
