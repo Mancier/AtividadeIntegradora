@@ -5,7 +5,7 @@
 #include "pipeline.h"
 #include "../Pipeline/pipeline.h"
 
-Pipeline *createPipeline(int totalStage, int cores, int type, int totalInstruction, int stages[5]){
+Pipeline *createPipeline(int type, int cores, int totalStage, int stages[5],  int totalInstruction){
     Pipeline* pipeline = malloc(sizeof(pipeline)); //(pipeline*)
     if(pipeline == NULL){
         printf("Memoria Insuficiente");

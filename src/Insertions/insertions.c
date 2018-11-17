@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include "insertions.h"
 #include "../Pipeline/pipeline.h"
+#include "../Files/files.h"
 
 Pipeline* manual_insertion_data() {
     int totalStage, totalInstruction, cores, type, stages[5];
@@ -65,7 +66,7 @@ Pipeline* manual_insertion_data() {
         printf("Escrita em memória: ");
         scanf("%d", &stages[4]);
     }
-    Pipeline *pipeline = createPipeline(totalStage, cores, type, totalInstruction, stages);
+    Pipeline *pipeline = createPipeline(type, cores, totalStage, stages, totalInstruction);
     return pipeline;
 };
 
@@ -73,6 +74,10 @@ Pipeline* manual_insertion_data() {
  * TODO Terminar a leitura de arquivos, e salva-los na struct
  */
 Pipeline* files_insertion_data(){
+    char *filePath;
+    printf("Entre com o caminho e o nome do arquivo: ");
+    scanf("%s", filePath);
+    return read_files(open_file(filePath));
 }
 
 void information_developers(){

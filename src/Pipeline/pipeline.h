@@ -1,7 +1,6 @@
 //
 // Created by victor on 01/10/18.
 //
-
 #ifndef AT011018_PIPELINE_H
 #define AT011018_PIPELINE_H
 typedef struct pipeline{
@@ -16,7 +15,7 @@ typedef struct pipeline{
     int timeSaving;
 } Pipeline;
 
-Pipeline *createPipeline(int totalStage, int cores, int type, int totalInstruction, int stages[5]);
+Pipeline *createPipeline(int type, int cores, int totalStage, int stages[5], int totalInstruction);
 
 int single_instruction_calculation(Pipeline *pipeline);
 
