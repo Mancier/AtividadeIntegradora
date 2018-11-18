@@ -22,11 +22,9 @@ int welcome_message();
 int main() {
     setlocale(LC_ALL, "Portuguese");
     Pipeline *pipeline;
-    FILE *file;
     int option;
-    char filePath[50];
+
     do{
-        //!!pipeline ? free_pipeline(pipeline) : "";
         option = welcome_message();
         switch (option){
             case 1: pipeline = manual_insertion_data(); break;
@@ -36,6 +34,10 @@ int main() {
         };
     } while(!pipeline);
 
+    print_calculations("Tempo de uma única instrução: %d", single_instruction_calculation(pipeline));
+    print_calculations("Instruções sequenciais: %d", sequencial_instruction_calculation(pipeline));
+    print_calculations("Instruções em Pipeline: %d", parellel_multiple_instruction(pipeline));
+    print_save_time("Economia de Tempo: ", pipeline->multipleSequentialInstruction, pipeline->multipleParellelInstruction);
 };
 
 int welcome_message(){

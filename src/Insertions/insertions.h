@@ -12,4 +12,8 @@ Pipeline* files_insertion_data();
 
 void information_developers();
 
+void print_calculations(char *message, int value);
+
+void print_save_time(char *message, int valueSequencial, int valueParallel);
+
 #endif //ATIVIDADEINTEGRADORA_INSERTIONS_H

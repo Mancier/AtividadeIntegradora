@@ -94,8 +94,26 @@ Pipeline* files_insertion_data(){
         file = open_file(&filePath, "r");
     } while (!file);
     return read_files(file);
-}
+};
 
 void information_developers(){
-    printf("Informações sobre os desenvolvedores");
+    printf("Informações sobre os desenvolvedores\n");
+    printf("Lucas Tokuhara - 967639\n");
+    printf("Victor Augusto - 985882\n");
+    printf("E que a força esteja com você\n");
+};
+
+void print_calculations(char *message, int value){
+    printf(message, value);
+    printf("\n");
+};
+
+void print_save_time(char *message, int valueSequencial, int valueParallel){
+    float time = (double)valueParallel/valueSequencial;
+    time -= 1.0f;
+    printf(message);
+    printf("\n");
+    print_calculations("Tempo absoluto: %d", (valueSequencial - valueParallel));
+    printf("Tempo em porcentagem: %.2f", time*-100);
+    printf("%\n");
 };
