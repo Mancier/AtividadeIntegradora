@@ -1,0 +1,5 @@
+Type: 2
+Cores: 2
+Total of Stages: 5
+Stages: [5,3,6,2,4]
+Instructions: 5
