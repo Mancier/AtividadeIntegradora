@@ -1,7 +1,7 @@
 # Pipeline Calculation
 Esse projeto faz calcúlos de pipeline escalar e superescalar, uma atividade solicitada pela faculdade.
 ```
-Type: int => Tipo de pipeline __1 - Escalar__, __2 - Superescalar__
+Type: int => Tipo de pipeline 1 - Escalar, 2 - Superescalar
 Cores: int => Quantidade de Núcleos para o processamento
 Total of Stages: int => Quantidade total de Estágios(fases) da pipeline
 Stages: [int] => Cada estágio tem um tempo, sendo assim, coloque no array os valores de acordo com a fase de modo sequencial
