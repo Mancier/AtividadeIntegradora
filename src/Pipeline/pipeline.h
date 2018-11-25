@@ -10,8 +10,8 @@ typedef struct pipeline{
     int arrayStages[5];
     int totalInstrunction;
     int singleInstruction;
-    int multipleSequentialInstruction;
-    int multipleParellelInstruction;
+    int sequentialInstruction;
+    int pipelineInstruction;
     int timeSaving;
 } Pipeline;
 
@@ -21,8 +21,10 @@ int single_instruction_calculation(Pipeline *pipeline);
 
 int sequencial_instruction_calculation(Pipeline *pipeline);
 
-int parellel_multiple_instruction(Pipeline *pipeline);
+int pipeline_calculation(Pipeline *pipeline);
 
 void free_pipeline(Pipeline* pipeline);
+
+int time_saving(Pipeline *pipeline);
 
 #endif //AT011018_PIPELINE_H

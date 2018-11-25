@@ -5,6 +5,7 @@
 #include "../Pipeline/pipeline.h"
 #include "files.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include "stdbool.h"
 
 Pipeline *read_files(FILE* pointerFile){
@@ -13,7 +14,7 @@ Pipeline *read_files(FILE* pointerFile){
          "\nCores: %d"
          "\nTotal of Stages: %d"
          "\nStages: [%d,%d,%d,%d,%d]"
-         "\nInstructions: %d",
+         "\nInstructions: %d\n",
          &type,
          &cores,
          &totalStages,
@@ -47,12 +48,8 @@ void write_files(Pipeline *pipeline, FILE *file){
     close_file(file);
 };
 
-FILE* open_file(char* filePath, char *mode){
-    FILE * file = fopen(filePath, mode);
-    if(file == NULL){
-        printf("Falha na Abertura do arquivo, por favor tente novamente\n");
-    }
-    return file;
+FILE* open_file(char filePath[], char* mode){
+    return fopen(filePath, mode);
 };
 
 void close_file(FILE* filePath){

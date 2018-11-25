@@ -3,6 +3,7 @@
 //
 #include <stdio.h>
 #include "pipeline.h"
+#include <stdlib.h>
 #include "../Pipeline/pipeline.h"
 
 Pipeline *createPipeline(int type, int cores, int totalStage, int stages[5],  int totalInstruction){
@@ -32,15 +33,12 @@ int single_instruction_calculation(Pipeline *pipeline){
 };
 
 int sequencial_instruction_calculation(Pipeline *pipeline) {
-    pipeline->multipleSequentialInstruction = 0;
-    for (int i = 0; i < pipeline->stagesPipeline; ++i) {
-        pipeline->multipleSequentialInstruction += pipeline->arrayStages[i];
-    }
-    pipeline->multipleSequentialInstruction *= pipeline->stagesPipeline;
-    return pipeline->multipleSequentialInstruction;
+    pipeline->sequentialInstruction = pipeline->singleInstruction * pipeline->totalInstrunction;
+
+    return pipeline->sequentialInstruction;
 };
 
-int parellel_multiple_instruction(Pipeline *pipeline){
+int pipeline_calculation(Pipeline *pipeline){
     int time = pipeline->arrayStages[0];
 
     //Procurando o maior tempo de execucao
@@ -49,21 +47,21 @@ int parellel_multiple_instruction(Pipeline *pipeline){
             time = pipeline->arrayStages[i];
         }
     };
-    pipeline->multipleParellelInstruction = 0;
-    for (int j = 0; j < pipeline->stagesPipeline-1; j+=pipeline->cores) {
-        if((pipeline->cores != 1 && j+pipeline->cores > pipeline->stagesPipeline && j != pipeline->stagesPipeline)){
-            pipeline->multipleParellelInstruction += time;
+    pipeline->pipelineInstruction = 0;
+    for (int j = 0; j < pipeline->totalInstrunction-pipeline->cores; j+=pipeline->cores) {
+        if((pipeline->cores != 1 && j+pipeline->cores > pipeline->totalInstrunction && j != pipeline->stagesPipeline)){
+            pipeline->pipelineInstruction += time;
         }
-        pipeline->multipleParellelInstruction += time;
+        pipeline->pipelineInstruction += time;
     }
-    pipeline->multipleParellelInstruction += pipeline->singleInstruction;
+    pipeline->pipelineInstruction += pipeline->singleInstruction;
 
-    return pipeline->multipleParellelInstruction;
+    return pipeline->pipelineInstruction;
 }
 
 int time_saving(Pipeline *pipeline){
     int sequencial = sequencial_instruction_calculation(pipeline);
-    int parallel = parellel_multiple_instruction(pipeline);
+    int parallel = pipeline_calculation(pipeline);
     pipeline->timeSaving = sequencial - parallel;
 
     return pipeline->timeSaving;

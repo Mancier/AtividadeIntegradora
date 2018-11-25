@@ -10,21 +10,23 @@
 
 Pipeline* manual_insertion_data() {
     int totalStage, totalInstruction, cores, type, stages[5], option;
-    char *filePath;
+    char filePath[1024];
+    FILE *fileOpened;
+
     do {
-        printf("Determine o tipo de pipeline: \n");
+        printf("\nDetermine o tipo de pipeline: \n");
         printf("\t 1 - Escalar\n");
         printf("\t 2 - Super Escalar\n");
-        printf("Opção: ");
+        printf("Opcao: ");
         scanf("%d", &type);
     } while (type < 1 || type > 2);
 
     if (type == 2) {
         do {
-            printf("Quantidade de núcleos: ");
+            printf("\nQuantidade de nucleos: ");
             scanf("%d", &cores);
             if (cores < 2) {
-                printf("\nPara ser SUPER ESCALAR é necessário que o processador tenha 2 ou mais núcleos");
+                printf("\nPara ser SUPER ESCALAR e necessario que o processador tenha 2 ou mais nucleos");
             };
         } while (cores < 2);
     } else {
@@ -32,7 +34,7 @@ Pipeline* manual_insertion_data() {
     };
 
     do{
-        printf("Entre com a quantidade de instrucoes: ");
+        printf("\nEntre com a quantidade de instrucoes: ");
         scanf("%d", &totalInstruction);
         if(totalInstruction <= 0){
             printf("Valor Invalido\n");
@@ -40,45 +42,47 @@ Pipeline* manual_insertion_data() {
     } while (totalInstruction <= 0);
 
     do {
-        printf("Número de estágios na pipeline (4 ou 5): ");
+        printf("\nNumero de estagios na pipeline (4 ou 5): ");
         scanf("%d", &totalStage);
         switch (totalStage) {
             case 4:
-                printf("Pipeline de 4 estágios\n");
+                printf("\tPipeline de 4 estagios\n");
                 break;
             case 5:
-                printf("Pipeline de 5 estágios\n");
+                printf("\tPipeline de 5 estagios\n");
                 break;
             default:
                 printf("Valor inválido\n");
                 break;
         }
     } while (!(totalStage == 5 || totalStage == 4));
-    printf("Entre com os tempos correspondentes a cada processo da pipeline\n");
-    printf("Busca de Instrução: ");
+    printf("\nEntre com os tempos correspondentes a cada processo da pipeline\n");
+    printf("\tBusca de Instrucao: ");
     scanf("%d", &stages[0]);
-    printf("Decodificação da Instrução: ");
+    printf("\tDecodificacao da Instrucao: ");
     scanf("%d", &stages[1]);
-    printf("Busca de Operandos: ");
+    printf("\tBusca de Operandos: ");
     scanf("%d", &stages[2]);
-    printf("Execução: ");
+    printf("\tExecucao: ");
     scanf("%d", &stages[3]);
     if (totalStage == 5) {
-        printf("Escrita em memória: ");
+        printf("\tEscrita em memoria: ");
         scanf("%d", &stages[4]);
     }
 
     Pipeline *pipeline = createPipeline(type, cores, totalStage, stages, totalInstruction);
 
     do{
-        printf("\nDeseja salvar esses dados em um aqrquivo .txt?\n1 - Sim\n0 - Nao\nOpcao: ");
+        printf("\nDeseja salvar esses dados em um aqrquivo .txt?\n\t1 - Sim\n\t0 - Nao\nOpcao: ");
         scanf("%d", &option);
-        if(option){
-            printf("Entre com o caminho e o nome do arquivo: ");
-            scanf("%s", &filePath);
-            write_files(pipeline, open_file(&filePath, "w"));
-        } else {
-            printf("Valor Invalido!\n");
+        if(option == 1){
+            do{
+                printf("Entre com o caminho e o nome do arquivo: ");
+                scanf("%s", filePath);
+                fileOpened = open_file(filePath, "w");
+                fileOpened == NULL && printf("Caminho Invalido, digite novamente.\n");
+            } while(fileOpened == NULL);
+            write_files(pipeline, fileOpened);
         }
     } while (option != 1 && option != 0);
 
@@ -86,21 +90,23 @@ Pipeline* manual_insertion_data() {
 };
 
 Pipeline* files_insertion_data(){
-    char *filePath;
+    char *filePath = malloc(sizeof(char)*128);
     FILE *file;
     do {
         printf("Entre com o caminho e o nome do arquivo: ");
-        scanf("%s", &filePath);
-        file = open_file(&filePath, "r");
+        scanf("%s", filePath);
+        file = open_file(filePath, "r");
     } while (!file);
     return read_files(file);
 };
 
-void information_developers(){
-    printf("Informações sobre os desenvolvedores\n");
-    printf("Lucas Tokuhara - 967639\n");
-    printf("Victor Augusto - 985882\n");
-    printf("E que a força esteja com você\n");
+Pipeline* information_developers(){
+    printf("Informacoes sobre os desenvolvedores\n");
+    printf("\tLucas Hiroshi Tokuhara - 967639\n");
+    printf("\tVictor Augusto de Souza e Silva- 985882\n");
+    printf("\tE que a forca esteja com voce\n");
+    system("pause");
+    return NULL;
 };
 
 void print_calculations(char *message, int value){
@@ -108,12 +114,15 @@ void print_calculations(char *message, int value){
     printf("\n");
 };
 
-void print_save_time(char *message, int valueSequencial, int valueParallel){
-    float time = (double)valueParallel/valueSequencial;
-    time -= 1.0f;
+float calc_percentage(float complete, float part){
+    return (1 - (part / complete)) * 100;
+}
+
+void print_save_time(char *message, Pipeline *pipeline){
+    float time = calc_percentage((float)pipeline->sequentialInstruction, (float)pipeline->pipelineInstruction);
     printf(message);
     printf("\n");
-    print_calculations("Tempo absoluto: %d", (valueSequencial - valueParallel));
-    printf("Tempo em porcentagem: %.2f", time*-100);
+    print_calculations("\tTempo total: %dns", time_saving(pipeline));
+    printf("\tTempo em porcentagem: %.2f", time);
     printf("%\n");
 };
