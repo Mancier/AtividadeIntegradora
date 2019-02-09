@@ -1,4 +1,4 @@
-# Pipeline Calculation
+# Pipeline Calculator
 Esse projeto faz calcúlos de pipeline escalar e superescalar, uma atividade solicitada pela faculdade.
 ```
 Type: int => Tipo de pipeline 1 - Escalar, 2 - Superescalar
